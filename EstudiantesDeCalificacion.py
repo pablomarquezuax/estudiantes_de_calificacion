@@ -17,13 +17,12 @@ def resultado(nota):
     else:
         return "Aprobado"
 
-# Input del usuario: introducir la nota del estudiante
-nota_estudiante = float(input("Introduce la nota del estudiante (0-100): "))
+# Input del usuario: introducir el array de notas de los estudiantes
+notas_estudiantes = input("Introduce el array de notas de los estudiantes separadas por espacios: ")
+notas_array = [float(nota) for nota in notas_estudiantes.split()]
 
-# Redondear la nota y obtener la calificación
-nota_redondeada = gradingStudents(nota_estudiante)
-calificacion = resultado(nota_redondeada)
-
-# Mostrar resultados
-print(f"Nota final: {nota_redondeada}")
-print(f"Resultado: {calificacion}")
+# Procesar cada nota en el array
+for i, nota in enumerate(notas_array):
+    nota_redondeada = gradingStudents(nota)
+    calificacion = resultado(nota_redondeada)
+    print(f"Estudiante {i + 1}: Nota final: {nota_redondeada}, Calificación: {calificacion}")
