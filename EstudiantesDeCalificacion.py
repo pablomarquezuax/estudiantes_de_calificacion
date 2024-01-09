@@ -1,33 +1,29 @@
-#!/bin/python3
+def gradingStudents(nota):
+    if nota < 40:
+        return nota  # No redondear si la nota es inferior a 40 (calificación suspensa)
+    else:
+        # Calcular el próximo múltiplo de 5
+        siguiente_multiplo_5 = (nota // 5 + 1) * 5
 
-import math
-import os
-import random
-import re
-import sys
+        # Redondear si la diferencia es menor que 3
+        if siguiente_multiplo_5 - nota < 3:
+            return siguiente_multiplo_5
+        else:
+            return nota
 
-def gradingStudents(grades):
-    for i in range(len(grades)):
-        if(grades[i]>37):
-            if((grades[i]%5)!=0):
-                if(5-(grades[i]%5)<3):
-                    grades[i]+=5-(grades[i]%5)
-    return (grades)
+def resultado(nota):
+    if nota < 40:
+        return "Suspenso"
+    else:
+        return "Aprobado"
 
-if __name__ == '__main__':
-    f = open(os.environ['OUTPUT_PATH'], 'w')
+# Input del usuario: introducir la nota del estudiante
+nota_estudiante = float(input("Introduce la nota del estudiante (0-100): "))
 
-    n = int(input())
+# Redondear la nota y obtener la calificación
+nota_redondeada = gradingStudents(nota_estudiante)
+calificacion = resultado(nota_redondeada)
 
-    grades = []
-
-    for _ in range(n):
-        grades_item = int(input())
-        grades.append(grades_item)
-
-    result = gradingStudents(grades)
-
-    f.write('\n'.join(map(str, result)))
-    f.write('\n')
-
-    f.close()
+# Mostrar resultados
+print(f"Nota final: {nota_redondeada}")
+print(f"Resultado: {calificacion}")
